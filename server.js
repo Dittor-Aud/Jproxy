@@ -91,7 +91,7 @@ const MODEL_MAPPING = {
 };
 
 // Used when an unrecognized alias is requested. Must point at a live model.
-const DEFAULT_MODEL = 'google/gemma-4-31b-it';
+const DEFAULT_MODEL = 'moonshotai/kimi-k3';
 
 // Ordered by observed reliability/speed — an early failing model delays every fallback behind it.
 const FALLBACK_MODELS = [
@@ -444,7 +444,7 @@ app.post('/v1/chat/completions', async (req, res) => {
     }
 
     // De-dupe: avoids retrying the same model twice if it's also in FALLBACK_MODELS.
-    const modelChain = [...new Set([primaryModel, ...FALLBACK_MODELS])];
+    const modelChain = [primaryModel];
 
     // Forward all client fields except model (replaced per-attempt) and
     // reasoning_effort (translated per-model by getReasoningPayload).

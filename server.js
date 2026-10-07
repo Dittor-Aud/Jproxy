@@ -455,7 +455,7 @@ app.post('/v1/chat/completions', async (req, res) => {
     }
 
     // De-dupe: avoids retrying the same model twice if it's also in FALLBACK_MODELS.
-    const modelChain = [primaryModel || model];
+    const modelChain = [primaryModel] || model;
 
     // Forward all client fields except model (replaced per-attempt) and
     // reasoning_effort (translated per-model by getReasoningPayload).

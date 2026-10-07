@@ -451,7 +451,7 @@ app.post('/v1/chat/completions', async (req, res) => {
     let primaryModel = MODEL_MAPPING[model];
     if (!primaryModel) {
       console.warn(`[PROXY] Unknown model alias "${model}", falling back to default: ${DEFAULT_MODEL}`);
-     let primaryModel = MODEL_MAPPING[model] || model;
+     const primaryModel = MODEL_MAPPING[model] || model;
     }
 
     // De-dupe: avoids retrying the same model twice if it's also in FALLBACK_MODELS.
